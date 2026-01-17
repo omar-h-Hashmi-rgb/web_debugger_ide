@@ -9,11 +9,12 @@ const codeAnalysisSchema = new mongoose.Schema({
   operation: {
     type: String,
     required: true,
-    enum: ['explain', 'fix', 'optimize']
+    enum: ['explain', 'fix', 'optimize', 'unknown']
   },
   aiResponse: {
     type: String,
-    required: true
+    required: false,
+    default: ''
   },
   language: {
     type: String,
@@ -54,7 +55,7 @@ codeAnalysisSchema.index({ operation: 1 });
 codeAnalysisSchema.index({ success: 1 });
 
 // Pre-save middleware to limit code storage
-codeAnalysisSchema.pre('save', function(next) {
+codeAnalysisSchema.pre('save', function (next) {
   // Truncate code if too long for storage
   if (this.code && this.code.length > 10000) {
     this.code = this.code.substring(0, 10000) + '... [truncated]';

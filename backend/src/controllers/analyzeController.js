@@ -5,7 +5,7 @@ const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 export const analyzeCode = async (req, res) => {
   const startTime = Date.now();
-  
+
   try {
     const { code, operation } = req.body;
 
@@ -37,7 +37,7 @@ export const analyzeCode = async (req, res) => {
 
     // Call Groq API
     const groqResponse = await axios.post(GROQ_API_URL, {
-      model: process.env.GROQ_MODEL || 'deepseek-r1-distill-llama-70b',
+      model: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
       messages: [
         {
           role: 'system',
@@ -84,7 +84,7 @@ export const analyzeCode = async (req, res) => {
 
   } catch (error) {
     const responseTime = Date.now() - startTime;
-    
+
     // Log error to database
     try {
       const errorRecord = new CodeAnalysis({
@@ -98,13 +98,16 @@ export const analyzeCode = async (req, res) => {
         success: false,
         errorMessage: error.message
       });
-      
+
       await errorRecord.save();
     } catch (dbError) {
       console.error('Failed to log error to database:', dbError);
     }
 
-    console.error('Analysis error:', error);
+    console.error('Analysis error:', error.message);
+    if (error.response) {
+      console.error('API Error Data:', JSON.stringify(error.response.data, null, 2));
+    }
 
     // Handle different types of errors
     if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {

@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onToggleTheme }) => {
           </button>
           
           <a
-            href="https://github.com"
+            href="https://github.com/omar-h-Hashmi-rgb/web_debugger_ide"
             target="_blank"
             rel="noopener noreferrer"
             className={`p-2 rounded-lg transition-colors ${
