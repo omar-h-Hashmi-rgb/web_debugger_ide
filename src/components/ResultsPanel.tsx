@@ -55,7 +55,7 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({
       {/* Header */}
       <div className={`px-4 py-3 border-b transition-colors ${isDark ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-gray-50'
         }`}>
-        <h2 className="font-semibold text-lg">Analysis Results</h2>
+        <h2 className={`font-semibold text-lg ${isDark ? 'text-white' : 'text-gray-900'}`}>Analysis Results</h2>
         <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'
           }`}>
           AI-powered code analysis and suggestions
@@ -83,8 +83,8 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({
         {error && (
           <div className="p-4">
             <div className={`p-4 rounded-lg border ${isDark
-                ? 'bg-red-900/20 border-red-800 text-red-200'
-                : 'bg-red-50 border-red-200 text-red-700'
+              ? 'bg-red-900/20 border-red-800 text-red-200'
+              : 'bg-red-50 border-red-200 text-red-700'
               }`}>
               <div className="flex items-start space-x-3">
                 <XCircle className="w-5 h-5 mt-0.5 flex-shrink-0" />
@@ -122,8 +122,8 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({
                 <button
                   onClick={handleCopy}
                   className={`flex items-center space-x-1 px-3 py-1 rounded text-sm transition-colors ${copied
-                      ? (isDark ? 'bg-green-900 text-green-300' : 'bg-green-100 text-green-700')
-                      : (isDark ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-600')
+                    ? (isDark ? 'bg-green-900 text-green-300' : 'bg-green-100 text-green-700')
+                    : (isDark ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-600')
                     }`}
                 >
                   {copied ? (

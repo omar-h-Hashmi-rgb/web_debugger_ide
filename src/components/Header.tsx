@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onToggleTheme }) => {
             <Code className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-xl font-bold">CodeFixer IDE</h1>
+            <h1 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>CodeFixer IDE</h1>
             <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'
               }`}>
               AI-Powered Code Analysis & Debugging
