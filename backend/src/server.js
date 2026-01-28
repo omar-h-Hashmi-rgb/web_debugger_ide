@@ -61,6 +61,14 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({
+    message: 'CodeFixer IDE Backend is Running 🚀',
+    status: 'Operational'
+  });
+});
+
 // API routes
 app.use('/api', analyzeRouter);
 
