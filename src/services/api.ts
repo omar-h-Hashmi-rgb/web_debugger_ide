@@ -10,11 +10,11 @@ export interface AnalyzeCodeResponse {
 
 export const analyzeCode = async (code: string, operation: Operation): Promise<AnalyzeCodeResponse> => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/api/analyze`, {
+    const response = await axios.post(`${API_BASE_URL}/analyze`, {
       code,
       operation
     });
-    
+
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
