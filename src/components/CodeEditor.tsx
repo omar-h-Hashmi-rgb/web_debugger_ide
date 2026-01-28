@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import Editor from '@monaco-editor/react';
 import { ChevronDown } from 'lucide-react';
 
@@ -32,9 +32,9 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
 }) => {
   const editorRef = useRef<any>(null);
 
-  const handleEditorDidMount = (editor: any, monaco: any) => {
+  const handleEditorDidMount = (editor: any) => {
     editorRef.current = editor;
-    
+
     // Set up editor options
     editor.updateOptions({
       fontSize: 14,
@@ -45,29 +45,26 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
     });
   };
 
-  const selectedLanguage = LANGUAGES.find(lang => lang.value === language);
+
 
   return (
     <div className="h-full flex flex-col">
       {/* Language Selector */}
-      <div className={`flex items-center justify-between px-4 py-2 border-b transition-colors ${
-        isDark ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'
-      }`}>
+      <div className={`flex items-center justify-between px-4 py-2 border-b transition-colors ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'
+        }`}>
         <div className="flex items-center space-x-2">
-          <span className={`text-sm font-medium ${
-            isDark ? 'text-gray-300' : 'text-gray-700'
-          }`}>
+          <span className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'
+            }`}>
             Language:
           </span>
           <div className="relative">
             <select
               value={language}
               onChange={(e) => onLanguageChange(e.target.value)}
-              className={`appearance-none pl-3 pr-8 py-1 rounded border text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                isDark 
-                  ? 'bg-gray-700 border-gray-600 text-white' 
-                  : 'bg-white border-gray-300 text-gray-900'
-              }`}
+              className={`appearance-none pl-3 pr-8 py-1 rounded border text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 ${isDark
+                ? 'bg-gray-700 border-gray-600 text-white'
+                : 'bg-white border-gray-300 text-gray-900'
+                }`}
             >
               {LANGUAGES.map((lang) => (
                 <option key={lang.value} value={lang.value}>
@@ -78,10 +75,9 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
             <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 pointer-events-none opacity-60" />
           </div>
         </div>
-        
-        <div className={`text-xs ${
-          isDark ? 'text-gray-400' : 'text-gray-500'
-        }`}>
+
+        <div className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'
+          }`}>
           Lines: {code.split('\n').length} | Characters: {code.length}
         </div>
       </div>

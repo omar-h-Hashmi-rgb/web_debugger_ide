@@ -6,6 +6,7 @@ interface ActionButtonsProps {
   onAnalyze: (operation: Operation) => void;
   loading: boolean;
   disabled: boolean;
+  isDark: boolean;
 }
 
 const OPERATIONS = [
@@ -32,7 +33,7 @@ const OPERATIONS = [
   }
 ];
 
-const ActionButtons: React.FC<ActionButtonsProps> = ({ onAnalyze, loading, disabled }) => {
+const ActionButtons: React.FC<ActionButtonsProps> = ({ onAnalyze, loading, disabled, isDark }) => {
   return (
     <div className="flex flex-wrap gap-4">
       {OPERATIONS.map(({ key, label, icon: Icon, description, color }) => (
@@ -43,9 +44,18 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onAnalyze, loading, disab
           className={`
             flex items-center space-x-3 px-6 py-3 rounded-lg border transition-all duration-200
             disabled:opacity-50 disabled:cursor-not-allowed
-            ${color === 'blue' && 'border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-700 hover:border-blue-300'}
-            ${color === 'red' && 'border-red-200 bg-red-50 hover:bg-red-100 text-red-700 hover:border-red-300'}
-            ${color === 'green' && 'border-green-200 bg-green-50 hover:bg-green-100 text-green-700 hover:border-green-300'}
+            ${color === 'blue' && (isDark
+              ? 'border-blue-800 bg-blue-900/20 hover:bg-blue-900/40 text-blue-300 hover:border-blue-700'
+              : 'border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-700 hover:border-blue-300'
+            )}
+            ${color === 'red' && (isDark
+              ? 'border-red-800 bg-red-900/20 hover:bg-red-900/40 text-red-300 hover:border-red-700'
+              : 'border-red-200 bg-red-50 hover:bg-red-100 text-red-700 hover:border-red-300'
+            )}
+            ${color === 'green' && (isDark
+              ? 'border-green-800 bg-green-900/20 hover:bg-green-900/40 text-green-300 hover:border-green-700'
+              : 'border-green-200 bg-green-50 hover:bg-green-100 text-green-700 hover:border-green-300'
+            )}
             ${!disabled && !loading && 'transform hover:scale-105 shadow-sm hover:shadow-md'}
           `}
           title={description}
